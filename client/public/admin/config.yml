@@ -1,0 +1,37 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+locale: 'fr'
+
+collections:
+  - name: "blog_fr"
+    label: "Articles Blog (Français)"
+    folder: "content/blog/fr"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Titre", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Catégorie", name: "category", widget: "string" }
+      - { label: "Résumé", name: "excerpt", widget: "text" }
+      - { label: "Image de couverture", name: "coverImage", widget: "image", required: false }
+      - { label: "Contenu", name: "body", widget: "markdown" }
+      - { label: "Publié", name: "published", widget: "boolean", default: true }
+
+  - name: "blog_en"
+    label: "Blog Articles (English)"
+    folder: "content/blog/en"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Category", name: "category", widget: "string" }
+      - { label: "Excerpt", name: "excerpt", widget: "text" }
+      - { label: "Cover Image", name: "coverImage", widget: "image", required: false }
+      - { label: "Content", name: "body", widget: "markdown" }
+      - { label: "Published", name: "published", widget: "boolean", default: true }

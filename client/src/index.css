@@ -1,0 +1,166 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * DESIGN SYSTEM — NovaXone "Editorial Tech"
+ * Movement: Magazine éditorial contemporain meets cabinet de conseil premium
+ * Palette: Bleu nuit (#1B2A4A) + Blanc pur + Turquoise (#0EA5E9) + Or (#C9A84C)
+ * Typography: Syne (titres, géométrique moderne) + Inter (corps)
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+:root {
+  --radius: 0.5rem;
+  /* NovaXone brand colors */
+  --navy: oklch(0.22 0.07 255);
+  --navy-light: oklch(0.32 0.07 255);
+  --turquoise: oklch(0.62 0.18 210);
+  --gold: oklch(0.72 0.12 75);
+
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.15 0.02 255);
+  --card: oklch(0.99 0 0);
+  --card-foreground: oklch(0.15 0.02 255);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.15 0.02 255);
+  --primary: oklch(0.22 0.07 255);
+  --primary-foreground: oklch(0.98 0 0);
+  --secondary: oklch(0.96 0.005 255);
+  --secondary-foreground: oklch(0.22 0.07 255);
+  --muted: oklch(0.96 0.005 255);
+  --muted-foreground: oklch(0.52 0.02 255);
+  --accent: oklch(0.62 0.18 210);
+  --accent-foreground: oklch(0.98 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(0.90 0.005 255);
+  --input: oklch(0.90 0.005 255);
+  --ring: oklch(0.62 0.18 210);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+  }
+  h1, h2, h3 {
+    font-family: 'Syne', sans-serif;
+  }
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  a[href] {
+    @apply cursor-pointer;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+  .flex {
+    min-height: 0;
+    min-width: 0;
+  }
+  @media (min-width: 640px) {
+    .container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 3rem;
+      padding-right: 3rem;
+      max-width: 1280px;
+    }
+  }
+
+  /* Editorial decorative number */
+  .deco-number {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(6rem, 15vw, 14rem);
+    font-weight: 900;
+    line-height: 1;
+    opacity: 0.04;
+    position: absolute;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  /* Section transitions */
+  .section-reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.6s cubic-bezier(0.23, 1, 0.32, 1), transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .section-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Service card with left border accent */
+  .service-card {
+    border-left: 3px solid oklch(0.62 0.18 210);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px oklch(0.22 0.07 255 / 0.12);
+  }
+
+  /* Nav link underline animation */
+  .nav-link {
+    position: relative;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: oklch(0.62 0.18 210);
+    transition: width 0.25s ease;
+  }
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    width: 100%;
+  }
+}
