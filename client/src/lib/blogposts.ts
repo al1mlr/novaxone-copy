@@ -30,7 +30,7 @@ Le deuxième cas de figure est celui où, au contraire, on veut produire avec l'
 Songeons aux limites de l'être humain, là où il n'est pas très bon, à travers quelques exemples. Nous sommes, entre autres, mauvais à résoudre les problèmes fortement combinatoires ; nous perdons rapidement le fil si nous devons explorer de multiples possibilités. De la même façon, il nous est difficile de traiter des volumes de données importants. Dans ce domaine, les technologies de machine learning ont montré leur grand intérêt pour détecter des régularités dans les données massivement abondantes.
 
 De manière plus étonnante, j'ai pu constater, dans le domaine du diagnostic de systèmes, que l'humain est très peu capable de traiter les problèmes de pannes multiples (deux éléments tombent en panne simultanément). De manière constante, même les experts faisaient l'hypothèse d'une cause unique à un dysfonctionnement, passant à côté de ces cas de pannes multiples. La réalisation d'un système d'IA qui, « consciemment », était capable, en cas de contradiction, de remettre en cause cette hypothèse de panne unique, a permis de fournir à ces mêmes experts un outil précieux.`,
-      image: '/manus-storage/ia-prothese_33dde709.jpg',
+      image: '/uploads/ia-prothese.jpg',
       links: [
         { text: 'n°743 de la Jaune et la Rouge', href: 'https://www.lajauneetlarouge.com/les-deux-intelligences-artificielles/' },
       ],
@@ -137,7 +137,7 @@ Se positionner par rapport à un timing de marché est une nécessité qui peut 
 On est bien entendu dans le questionnement du bon moment pour agir, l'une des questions à ce propos étant : « Suis-je en avance sur mon marché ? ». Mais aussi : « Ai-je raté le coche ? »
 
 Ces questions sont fondamentales car elles conditionnent la stratégie de développement de l'entreprise, son rythme d'investissement et ses priorités. Une entreprise qui se positionne trop tôt brûle ses ressources sur un marché pas encore prêt. Une entreprise qui arrive trop tard se retrouve dans une compétition acharnée sur un marché déjà occupé.`,
-      image: '/manus-storage/timing-emoji_fa2a95ce.png',
+      image: '/uploads/timing-emoji.png',
       links: [
         { text: 'Site du CNRS - Cahier de laboratoire', href: 'http://www.cnrs.fr/infoslabos/cahier-laboratoire/' },
       ],
@@ -171,7 +171,7 @@ La réponse est dans le timing : les conditions technologiques, organisationnell
 Ce cas d'école illustre parfaitement comment une innovation techniquement supérieure peut échouer simplement parce qu'elle arrive trop tôt sur le marché. Les interfaces utilisateurs des années 90 et 2000 n'étaient pas adaptées à un usage en laboratoire. Les tablettes tactiles n'existaient pas encore. Le cloud non plus.
 
 Les leçons de ce cas s'appliquent à de nombreuses innovations dans le secteur du logiciel et des services numériques. Avant de se demander "comment vendre mon innovation", il faut se demander "est-ce que le marché est prêt à l'adopter ?"`,
-      image: '/manus-storage/timing-v2_b5b1dec8.png',
+      image: '/uploads/timing-v2.png',
     },
     {
       id: 'conference-timing-partie-3',
@@ -234,7 +234,7 @@ But the Lisp machines were too expensive and too slow compared to the Unix works
 The story of Lisp machines is a perfect example of a technology that was ahead of its time. The concepts were right, the implementation was elegant, but the timing was wrong.
 
 Today, many of the ideas from Lisp have been rediscovered and implemented in modern languages like Python, Ruby, and JavaScript. The functional programming paradigm that was central to Lisp is now mainstream.`,
-      image: '/manus-storage/ibmpc_7ce7b613.png',
+      image: '/uploads/ibmpc.png',
       links: [
         { text: 'Lisp (programming language)', href: 'https://en.wikipedia.org/wiki/Lisp_(programming_language)' },
         { text: 'CommonLisp', href: 'https://common-lisp.net/' },

@@ -39,9 +39,7 @@ export default function Navbar({ lang, onLangChange, onBlogClick }: NavbarProps)
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white/95 backdrop-blur-md shadow-sm' : 'bg-transparent'
-      }`}
+      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white shadow-sm"
     >
       <div className="container">
         <div className="flex items-center justify-between h-16 md:h-20">
@@ -51,7 +49,7 @@ export default function Navbar({ lang, onLangChange, onBlogClick }: NavbarProps)
             className="flex items-center gap-2 focus:outline-none"
           >
             <img
-              src="/manus-storage/logo-novaxone_b5e3237c.png"
+              src="/uploads/logo-novaxone.png"
               alt="NovaXone"
               className="h-8 md:h-10 object-contain"
             />
@@ -63,18 +61,14 @@ export default function Navbar({ lang, onLangChange, onBlogClick }: NavbarProps)
               <button
                 key={item.id}
                 onClick={() => scrollTo(item.id)}
-                className={`nav-link text-sm font-medium transition-colors duration-200 ${
-                  scrolled ? 'text-slate-700 hover:text-sky-500' : 'text-white/90 hover:text-white'
-                }`}
+                className="nav-link text-sm font-semibold transition-colors duration-200 text-[#6e2b62] hover:text-[#9b3d8a]"
               >
                 {item.label}
               </button>
             ))}
             <button
               onClick={onBlogClick}
-              className={`nav-link text-sm font-medium transition-colors duration-200 ${
-                scrolled ? 'text-slate-700 hover:text-sky-500' : 'text-white/90 hover:text-white'
-              }`}
+              className="nav-link text-sm font-semibold transition-colors duration-200 text-[#6e2b62] hover:text-[#9b3d8a]"
             >
               {t.blog}
             </button>
@@ -84,24 +78,16 @@ export default function Navbar({ lang, onLangChange, onBlogClick }: NavbarProps)
               <button
                 onClick={() => onLangChange('fr')}
                 className={`text-xs font-semibold px-1.5 py-0.5 rounded-full transition-all ${
-                  lang === 'fr'
-                    ? 'bg-sky-500 text-white'
-                    : scrolled
-                    ? 'text-slate-500 hover:text-slate-700'
-                    : 'text-white/60 hover:text-white'
+                  lang === 'fr' ? 'bg-sky-500 text-white' : 'text-slate-500 hover:text-slate-700'
                 }`}
               >
                 FR
               </button>
-              <span className={`text-xs ${scrolled ? 'text-slate-300' : 'text-white/30'}`}>|</span>
+              <span className="text-xs text-slate-300">|</span>
               <button
                 onClick={() => onLangChange('en')}
                 className={`text-xs font-semibold px-1.5 py-0.5 rounded-full transition-all ${
-                  lang === 'en'
-                    ? 'bg-sky-500 text-white'
-                    : scrolled
-                    ? 'text-slate-500 hover:text-slate-700'
-                    : 'text-white/60 hover:text-white'
+                  lang === 'en' ? 'bg-sky-500 text-white' : 'text-slate-500 hover:text-slate-700'
                 }`}
               >
                 EN
@@ -114,21 +100,21 @@ export default function Navbar({ lang, onLangChange, onBlogClick }: NavbarProps)
             <div className="flex items-center gap-1 border border-current/20 rounded-full px-2 py-1">
               <button
                 onClick={() => onLangChange('fr')}
-                className={`text-xs font-semibold px-1 ${lang === 'fr' ? 'text-sky-400' : scrolled ? 'text-slate-400' : 'text-white/60'}`}
+                className={`text-xs font-semibold px-1 ${lang === 'fr' ? 'text-sky-400' : 'text-slate-400'}`}
               >
                 FR
               </button>
-              <span className={`text-xs ${scrolled ? 'text-slate-300' : 'text-white/30'}`}>|</span>
+              <span className="text-xs text-slate-300">|</span>
               <button
                 onClick={() => onLangChange('en')}
-                className={`text-xs font-semibold px-1 ${lang === 'en' ? 'text-sky-400' : scrolled ? 'text-slate-400' : 'text-white/60'}`}
+                className={`text-xs font-semibold px-1 ${lang === 'en' ? 'text-sky-400' : 'text-slate-400'}`}
               >
                 EN
               </button>
             </div>
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className={`p-2 ${scrolled ? 'text-slate-700' : 'text-white'}`}
+              className="p-2 text-slate-700"
               aria-label="Menu"
             >
               <div className="w-5 flex flex-col gap-1">

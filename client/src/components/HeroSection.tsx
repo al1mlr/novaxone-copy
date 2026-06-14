@@ -36,24 +36,25 @@ export default function HeroSection({ lang }: HeroSectionProps) {
       id="hero"
       className="relative min-h-screen flex items-center overflow-hidden"
       style={{
-        background: 'linear-gradient(135deg, #1a3a5c 0%, #2a5080 45%, #2e6090 100%)',
+        background: 'linear-gradient(135deg, rgba(110,43,98,0.40) 0%, rgba(130,55,115,0.35) 45%, rgba(150,65,130,0.30) 100%)',
+        backgroundColor: '#e0cedd',
       }}
     >
-      {/* Background image on right side */}
+      {/* Background image — full width */}
       <div
-        className="absolute inset-y-0 right-0 w-full md:w-1/2 pointer-events-none"
+        className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage: `url('/manus-storage/fond-slider-1024x576_32f2b1e4.jpg')`,
+          backgroundImage: `url('/uploads/fond-hero-whiteboard.jpg')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          opacity: 0.25,
+          opacity: 0.55,
         }}
       />
       {/* Gradient overlay to blend image with left content */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'linear-gradient(90deg, #1a3a5c 40%, rgba(26,58,92,0.7) 65%, rgba(26,58,92,0.2) 100%)',
+          background: 'linear-gradient(90deg, rgba(110,43,98,0.45) 30%, rgba(110,43,98,0.25) 60%, rgba(110,43,98,0.05) 100%)',
         }}
       />
 

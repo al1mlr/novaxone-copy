@@ -2,7 +2,7 @@ backend:
   name: git-gateway
   branch: main
 
-media_folder: "public/uploads"
+media_folder: "client/public/uploads"
 public_folder: "/uploads"
 
 locale: 'fr'
@@ -10,28 +10,30 @@ locale: 'fr'
 collections:
   - name: "blog_fr"
     label: "Articles Blog (Français)"
-    folder: "content/blog/fr"
+    folder: "client/src/content/blog/fr"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - { label: "Titre", name: "title", widget: "string" }
-      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
       - { label: "Catégorie", name: "category", widget: "string" }
       - { label: "Résumé", name: "excerpt", widget: "text" }
-      - { label: "Image de couverture", name: "coverImage", widget: "image", required: false }
+      - { label: "Image de couverture", name: "coverImage", widget: "string", required: false, hint: "URL de l'image (ex: /manus-storage/mon-image.jpg ou /uploads/mon-image.jpg)" }
+      - { label: "Liens de référence (JSON)", name: "links", widget: "text", required: false, hint: 'Format JSON: [{"text":"Titre lien","href":"https://..."}]' }
       - { label: "Contenu", name: "body", widget: "markdown" }
       - { label: "Publié", name: "published", widget: "boolean", default: true }
 
   - name: "blog_en"
     label: "Blog Articles (English)"
-    folder: "content/blog/en"
+    folder: "client/src/content/blog/en"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
       - { label: "Category", name: "category", widget: "string" }
       - { label: "Excerpt", name: "excerpt", widget: "text" }
-      - { label: "Cover Image", name: "coverImage", widget: "image", required: false }
+      - { label: "Cover Image", name: "coverImage", widget: "string", required: false, hint: "Image URL (e.g. /manus-storage/my-image.jpg or /uploads/my-image.jpg)" }
+      - { label: "Reference Links (JSON)", name: "links", widget: "text", required: false, hint: 'JSON format: [{"text":"Link title","href":"https://..."}]' }
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Published", name: "published", widget: "boolean", default: true }

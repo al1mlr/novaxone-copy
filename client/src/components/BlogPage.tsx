@@ -1,17 +1,19 @@
-import { useState } from 'react';
+// Design: Editorial Tech — Syne font, #2a5080 blue, clean white background
+// Blog articles are loaded from Markdown files in /src/content/blog/fr/ and /src/content/blog/en/
+// Frontmatter is parsed manually from raw string imports (no Vite plugin needed)
+
+import { useState, useEffect } from 'react';
 import { content, type Lang } from '@/lib/content';
-import { blogPosts } from '@/lib/blogposts';
-import { ArrowLeft, Plus, X, Calendar, Tag, ChevronRight } from 'lucide-react';
+import { ArrowLeft, Calendar, Tag, ChevronRight } from 'lucide-react';
 
 interface BlogPost {
   id: string;
   title: string;
   date: string;
-  dateLabel: string;
   category: string;
   excerpt: string;
-  content: string;
-  image?: string;
+  body: string;
+  coverImage?: string;
   links?: { text: string; href: string }[];
 }
 
@@ -20,38 +22,186 @@ interface BlogPageProps {
   onBack: () => void;
 }
 
+// Parse frontmatter from raw Markdown string
+function parseFrontmatter(raw: string): { frontmatter: Record<string, string>; body: string } {
+  const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
+  if (!match) return { frontmatter: {}, body: raw };
+
+  const fmLines = match[1].split('\n');
+  const frontmatter: Record<string, string> = {};
+
+  for (const line of fmLines) {
+    const colonIdx = line.indexOf(':');
+    if (colonIdx === -1) continue;
+    const key = line.slice(0, colonIdx).trim();
+    const value = line.slice(colonIdx + 1).trim().replace(/^["']|["']$/g, '');
+    frontmatter[key] = value;
+  }
+
+  return { frontmatter, body: match[2].trim() };
+}
+
+// Load all markdown files for a given language
+const frModules = import.meta.glob('/src/content/blog/fr/*.md', { query: '?raw', import: 'default' });
+const enModules = import.meta.glob('/src/content/blog/en/*.md', { query: '?raw', import: 'default' });
+
+async function loadPosts(lang: Lang): Promise<BlogPost[]> {
+  const modules = lang === 'fr' ? frModules : enModules;
+  const posts: BlogPost[] = [];
+
+  for (const [path, loader] of Object.entries(modules)) {
+    const raw = (await loader()) as string;
+    const { frontmatter, body } = parseFrontmatter(raw);
+
+    if (frontmatter.published === 'false') continue;
+
+    // Extract slug from filename
+    const filename = path.split('/').pop() ?? '';
+    const slug = filename.replace(/\.md$/, '');
+
+    // Parse links JSON if present
+    let links: { text: string; href: string }[] | undefined;
+    if (frontmatter.links) {
+      try {
+        links = JSON.parse(frontmatter.links);
+      } catch {
+        links = undefined;
+      }
+    }
+
+    posts.push({
+      id: slug,
+      title: frontmatter.title ?? slug,
+      date: frontmatter.date ?? '',
+      category: frontmatter.category ?? '',
+      excerpt: frontmatter.excerpt ?? '',
+      body,
+      coverImage: frontmatter.coverImage ?? undefined,
+      links,
+    });
+  }
+
+  // Sort by date descending
+  posts.sort((a, b) => (a.date < b.date ? 1 : -1));
+  return posts;
+}
+
+// Render Markdown body as JSX (simplified: handles **bold**, headings, lists, paragraphs)
+function renderMarkdown(md: string) {
+  const blocks = md.split(/\n\n+/);
+  return blocks.map((block, i) => {
+    // Heading 2
+    if (block.startsWith('## ')) {
+      return (
+        <h2 key={i} className="text-slate-900 text-2xl font-bold mt-10 mb-4" style={{ fontFamily: "'Syne', sans-serif" }}>
+          {block.replace(/^## /, '')}
+        </h2>
+      );
+    }
+    // Heading 3
+    if (block.startsWith('### ')) {
+      return (
+        <h3 key={i} className="text-slate-900 text-xl font-bold mt-8 mb-3" style={{ fontFamily: "'Syne', sans-serif" }}>
+          {block.replace(/^### /, '')}
+        </h3>
+      );
+    }
+    // Bold-only line as heading
+    if (/^\*\*[^*]+\*\*$/.test(block.trim())) {
+      return (
+        <h3 key={i} className="text-slate-900 text-xl font-bold mt-8 mb-3" style={{ fontFamily: "'Syne', sans-serif" }}>
+          {block.trim().replace(/\*\*/g, '')}
+        </h3>
+      );
+    }
+    // Unordered list
+    if (block.split('\n').every(l => l.startsWith('- ') || l.trim() === '')) {
+      const items = block.split('\n').filter(l => l.startsWith('- '));
+      return (
+        <ul key={i} className="space-y-2 mb-4">
+          {items.map((item, j) => (
+            <li key={j} className="flex items-start gap-2 text-slate-600">
+              <ChevronRight size={16} className="text-sky-500 mt-0.5 shrink-0" />
+              {renderInline(item.replace(/^- /, ''))}
+            </li>
+          ))}
+        </ul>
+      );
+    }
+    // Numbered list
+    if (block.split('\n').every(l => /^\d+\./.test(l) || l.trim() === '')) {
+      const items = block.split('\n').filter(l => /^\d+\./.test(l));
+      return (
+        <ol key={i} className="space-y-2 mb-4 list-decimal list-inside">
+          {items.map((item, j) => (
+            <li key={j} className="text-slate-600">
+              {renderInline(item.replace(/^\d+\.\s*/, ''))}
+            </li>
+          ))}
+        </ol>
+      );
+    }
+    // Tags line (starts with "Tags :")
+    if (block.startsWith('Tags :') || block.startsWith('Tags:')) {
+      return (
+        <p key={i} className="text-slate-400 text-sm italic mt-6">
+          {block}
+        </p>
+      );
+    }
+    // Default paragraph
+    return (
+      <p key={i} className="text-slate-600 leading-relaxed mb-4">
+        {renderInline(block)}
+      </p>
+    );
+  });
+}
+
+// Render inline Markdown (bold, italic, links)
+function renderInline(text: string): React.ReactNode {
+  // Split by bold/italic/link patterns
+  const parts = text.split(/(\*\*.*?\*\*|\*.*?\*|\[.*?\]\(.*?\))/g);
+  return parts.map((part, i) => {
+    if (part.startsWith('**') && part.endsWith('**')) {
+      return <strong key={i} className="text-slate-800 font-semibold">{part.slice(2, -2)}</strong>;
+    }
+    if (part.startsWith('*') && part.endsWith('*') && !part.startsWith('**')) {
+      return <em key={i}>{part.slice(1, -1)}</em>;
+    }
+    const linkMatch = part.match(/^\[(.*?)\]\((.*?)\)$/);
+    if (linkMatch) {
+      return (
+        <a key={i} href={linkMatch[2]} target="_blank" rel="noopener noreferrer" className="text-sky-600 hover:underline">
+          {linkMatch[1]}
+        </a>
+      );
+    }
+    return part;
+  });
+}
+
 export default function BlogPage({ lang, onBack }: BlogPageProps) {
   const t = content[lang].blog;
-  const [posts, setPosts] = useState<BlogPost[]>(blogPosts[lang]);
+  const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [loading, setLoading] = useState(true);
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
-  const [showForm, setShowForm] = useState(false);
-  const [adminMode, setAdminMode] = useState(false);
-  const [form, setForm] = useState({
-    title: '', excerpt: '', content: '', category: '', date: new Date().toISOString().split('T')[0],
-  });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const newPost: BlogPost = {
-      id: `post-${Date.now()}`,
-      title: form.title,
-      excerpt: form.excerpt,
-      content: form.content,
-      category: form.category,
-      date: form.date,
-      dateLabel: new Date(form.date).toLocaleDateString(lang === 'fr' ? 'fr-FR' : 'en-US', { day: '2-digit', month: 'short' }),
-    };
-    setPosts([newPost, ...posts]);
-    setForm({ title: '', excerpt: '', content: '', category: '', date: new Date().toISOString().split('T')[0] });
-    setShowForm(false);
-  };
+  useEffect(() => {
+    setLoading(true);
+    setSelectedPost(null);
+    loadPosts(lang).then(loaded => {
+      setPosts(loaded);
+      setLoading(false);
+    });
+  }, [lang]);
 
   // Article detail view
   if (selectedPost) {
     return (
       <div className="min-h-screen bg-white">
         {/* Header */}
-        <div style={{ background: '#2a5080' }} className="py-16">
+        <div style={{ background: '#945790' }} className="py-16">
           <div className="container">
             <button
               onClick={() => setSelectedPost(null)}
@@ -66,9 +216,11 @@ export default function BlogPage({ lang, onBack }: BlogPageProps) {
               </span>
               <span className="text-slate-400 text-sm flex items-center gap-1">
                 <Calendar size={13} />
-                {new Date(selectedPost.date).toLocaleDateString(lang === 'fr' ? 'fr-FR' : 'en-US', {
-                  year: 'numeric', month: 'long', day: 'numeric'
-                })}
+                {selectedPost.date
+                  ? new Date(selectedPost.date).toLocaleDateString(lang === 'fr' ? 'fr-FR' : 'en-US', {
+                      year: 'numeric', month: 'long', day: 'numeric',
+                    })
+                  : ''}
               </span>
             </div>
             <h1
@@ -83,56 +235,27 @@ export default function BlogPage({ lang, onBack }: BlogPageProps) {
         {/* Content */}
         <div className="container py-16">
           <div className="max-w-3xl">
-            {/* Image de l'article */}
-            {selectedPost.image && (
+            {/* Cover image */}
+            {selectedPost.coverImage && (
               <div className="mb-8 rounded-xl overflow-hidden shadow-lg">
-                <img src={selectedPost.image} alt={selectedPost.title} className="w-full h-64 object-cover" />
+                <img src={selectedPost.coverImage} alt={selectedPost.title} className="w-full h-64 object-cover" />
               </div>
             )}
+            {/* Excerpt */}
             <p className="text-slate-500 text-lg leading-relaxed mb-8 border-l-4 border-sky-400 pl-5 italic">
               {selectedPost.excerpt}
             </p>
+            {/* Body */}
             <div className="prose prose-slate max-w-none">
-              {selectedPost.content.split('\n\n').map((para, i) => {
-                if (para.startsWith('**') && para.endsWith('**')) {
-                  return (
-                    <h3 key={i} className="text-slate-900 text-xl font-bold mt-8 mb-4" style={{ fontFamily: "'Syne', sans-serif" }}>
-                      {para.replace(/\*\*/g, '')}
-                    </h3>
-                  );
-                }
-                if (para.includes('**')) {
-                  const parts = para.split(/(\*\*.*?\*\*)/g);
-                  return (
-                    <p key={i} className="text-slate-600 leading-relaxed mb-4">
-                      {parts.map((part, j) =>
-                        part.startsWith('**') ? (
-                          <strong key={j} className="text-slate-800 font-semibold">{part.replace(/\*\*/g, '')}</strong>
-                        ) : part
-                      )}
-                    </p>
-                  );
-                }
-                if (para.startsWith('- ')) {
-                  const items = para.split('\n').filter(l => l.startsWith('- '));
-                  return (
-                    <ul key={i} className="space-y-2 mb-4">
-                      {items.map((item, j) => (
-                        <li key={j} className="flex items-start gap-2 text-slate-600">
-                          <ChevronRight size={16} className="text-sky-500 mt-0.5 shrink-0" />
-                          {item.replace('- ', '')}
-                        </li>
-                      ))}
-                    </ul>
-                  );
-                }
-                return <p key={i} className="text-slate-600 leading-relaxed mb-4">{para}</p>;
-              })}
+              {renderMarkdown(selectedPost.body)}
             </div>
-            {/* Liens de référence */}
+            {/* Reference links */}
             {selectedPost.links && selectedPost.links.length > 0 && (
               <div className="mt-10 pt-8 border-t border-slate-200">
-                <h4 className="text-slate-700 font-semibold mb-4 text-sm uppercase tracking-wider" style={{ fontFamily: "'Syne', sans-serif" }}>
+                <h4
+                  className="text-slate-700 font-semibold mb-4 text-sm uppercase tracking-wider"
+                  style={{ fontFamily: "'Syne', sans-serif" }}
+                >
                   {lang === 'fr' ? 'Références' : 'References'}
                 </h4>
                 <ul className="space-y-2">
@@ -162,7 +285,7 @@ export default function BlogPage({ lang, onBack }: BlogPageProps) {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <div style={{ background: '#2a5080' }} className="py-20">
+      <div style={{ background: '#945790' }} className="py-20">
         <div className="container">
           <button
             onClick={onBack}
@@ -175,125 +298,22 @@ export default function BlogPage({ lang, onBack }: BlogPageProps) {
             <div className="h-px w-10 bg-sky-400" />
             <span className="text-sky-400 text-sm font-semibold tracking-widest uppercase">Blog</span>
           </div>
-          <div className="flex items-end justify-between gap-4 flex-wrap">
-            <h1
-              className="text-white text-4xl md:text-5xl font-bold"
-              style={{ fontFamily: "'Syne', sans-serif" }}
-            >
-              {t.title}
-            </h1>
-            <div className="flex items-center gap-3">
-              <button
-                onClick={() => setAdminMode(!adminMode)}
-                className={`text-xs font-semibold px-3 py-1.5 rounded-full border transition-all ${
-                  adminMode
-                    ? 'bg-sky-500 border-sky-500 text-white'
-                    : 'border-white/20 text-white/60 hover:text-white hover:border-white/40'
-                }`}
-              >
-                {t.adminMode}
-              </button>
-              {adminMode && (
-                <button
-                  onClick={() => setShowForm(true)}
-                  className="flex items-center gap-2 bg-sky-500 hover:bg-sky-400 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-all"
-                >
-                  <Plus size={16} />
-                  {t.addArticle}
-                </button>
-              )}
-            </div>
-          </div>
+          <h1
+            className="text-white text-4xl md:text-5xl font-bold"
+            style={{ fontFamily: "'Syne', sans-serif" }}
+          >
+            {t.title}
+          </h1>
         </div>
       </div>
 
-      {/* Add article form */}
-      {showForm && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl">
-            <div className="flex items-center justify-between p-6 border-b border-slate-100">
-              <h2 className="text-slate-900 font-bold text-xl" style={{ fontFamily: "'Syne', sans-serif" }}>
-                {t.addArticle}
-              </h2>
-              <button onClick={() => setShowForm(false)} className="text-slate-400 hover:text-slate-600 transition-colors">
-                <X size={20} />
-              </button>
-            </div>
-            <form onSubmit={handleSubmit} className="p-6 space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-slate-600 mb-1">{t.form.title} *</label>
-                <input
-                  type="text"
-                  required
-                  value={form.title}
-                  onChange={e => setForm({ ...form, title: e.target.value })}
-                  className="w-full px-4 py-2.5 border border-slate-200 rounded-xl text-slate-800 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent"
-                />
-              </div>
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-slate-600 mb-1">{t.form.category}</label>
-                  <input
-                    type="text"
-                    value={form.category}
-                    onChange={e => setForm({ ...form, category: e.target.value })}
-                    className="w-full px-4 py-2.5 border border-slate-200 rounded-xl text-slate-800 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-slate-600 mb-1">{t.form.date}</label>
-                  <input
-                    type="date"
-                    value={form.date}
-                    onChange={e => setForm({ ...form, date: e.target.value })}
-                    className="w-full px-4 py-2.5 border border-slate-200 rounded-xl text-slate-800 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent"
-                  />
-                </div>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-slate-600 mb-1">{t.form.excerpt} *</label>
-                <textarea
-                  required
-                  rows={3}
-                  value={form.excerpt}
-                  onChange={e => setForm({ ...form, excerpt: e.target.value })}
-                  className="w-full px-4 py-2.5 border border-slate-200 rounded-xl text-slate-800 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent resize-none"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-slate-600 mb-1">{t.form.content} *</label>
-                <textarea
-                  required
-                  rows={8}
-                  value={form.content}
-                  onChange={e => setForm({ ...form, content: e.target.value })}
-                  placeholder={lang === 'fr' ? 'Contenu en markdown simplifié...' : 'Content in simplified markdown...'}
-                  className="w-full px-4 py-2.5 border border-slate-200 rounded-xl text-slate-800 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent resize-none font-mono text-sm"
-                />
-              </div>
-              <div className="flex gap-3 pt-2">
-                <button
-                  type="submit"
-                  className="flex-1 bg-sky-500 hover:bg-sky-400 text-white font-semibold py-3 rounded-xl transition-all"
-                >
-                  {t.form.submit}
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setShowForm(false)}
-                  className="px-6 border border-slate-200 text-slate-600 hover:bg-slate-50 font-medium py-3 rounded-xl transition-all"
-                >
-                  {t.form.cancel}
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
-
       {/* Articles list */}
       <div className="container py-16">
-        {posts.length === 0 ? (
+        {loading ? (
+          <div className="flex justify-center py-16">
+            <div className="w-8 h-8 border-2 border-sky-400 border-t-transparent rounded-full animate-spin" />
+          </div>
+        ) : posts.length === 0 ? (
           <p className="text-slate-400 text-center py-16">{t.noPosts}</p>
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -302,26 +322,31 @@ export default function BlogPage({ lang, onBack }: BlogPageProps) {
                 key={post.id}
                 className="bg-white border border-slate-100 rounded-2xl overflow-hidden hover:border-sky-200 hover:shadow-lg transition-all duration-200 group flex flex-col"
               >
-                {/* Image de vignette */}
-                {post.image && (
+                {/* Cover image thumbnail */}
+                {post.coverImage && (
                   <div className="h-44 overflow-hidden">
                     <img
-                      src={post.image}
+                      src={post.coverImage}
                       alt={post.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
                 )}
-                {/* Date badge */}
-                <div style={{ background: post.image ? 'transparent' : '#2a5080' }} className={`px-6 py-4 flex items-center justify-between ${post.image ? 'border-b border-slate-100' : ''}`}>
-                  <span className={`text-sm font-semibold flex items-center gap-1.5 ${post.image ? 'text-sky-600' : 'text-sky-400'}`}>
+                {/* Date/category bar */}
+                <div
+                  style={{ background: post.coverImage ? 'transparent' : '#945790' }}
+                  className={`px-6 py-4 flex items-center justify-between ${post.coverImage ? 'border-b border-slate-100' : ''}`}
+                >
+                  <span className={`text-sm font-semibold flex items-center gap-1.5 ${post.coverImage ? 'text-sky-600' : 'text-sky-400'}`}>
                     <Calendar size={13} />
-                    {new Date(post.date).toLocaleDateString(lang === 'fr' ? 'fr-FR' : 'en-US', {
-                      year: 'numeric', month: 'short', day: 'numeric'
-                    })}
+                    {post.date
+                      ? new Date(post.date).toLocaleDateString(lang === 'fr' ? 'fr-FR' : 'en-US', {
+                          year: 'numeric', month: 'short', day: 'numeric',
+                        })
+                      : ''}
                   </span>
                   {post.category && (
-                    <span className={`text-xs flex items-center gap-1 ${post.image ? 'text-slate-500' : 'text-slate-400'}`}>
+                    <span className={`text-xs flex items-center gap-1 ${post.coverImage ? 'text-slate-500' : 'text-slate-400'}`}>
                       <Tag size={11} />
                       {post.category}
                     </span>
@@ -346,18 +371,6 @@ export default function BlogPage({ lang, onBack }: BlogPageProps) {
                     <ChevronRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
                   </button>
                 </div>
-
-                {/* Admin delete */}
-                {adminMode && (
-                  <div className="px-6 pb-4 border-t border-slate-50 pt-3">
-                    <button
-                      onClick={() => setPosts(posts.filter(p => p.id !== post.id))}
-                      className="text-xs text-red-400 hover:text-red-600 transition-colors"
-                    >
-                      {lang === 'fr' ? 'Supprimer' : 'Delete'}
-                    </button>
-                  </div>
-                )}
               </article>
             ))}
           </div>

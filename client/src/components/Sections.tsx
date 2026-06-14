@@ -74,19 +74,7 @@ export function SujetsSection({ lang }: { lang: Lang }) {
   const ref = useReveal();
 
   return (
-    <section id="sujets" className="py-24 relative overflow-hidden" style={{ background: '#2a5080' }}>
-      {/* Background image */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage: `url('/manus-storage/fond-slider-1024x576_32f2b1e4.jpg')`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center top',
-          opacity: 0.18,
-        }}
-      />
-      {/* Dark overlay for readability */}
-      <div className="absolute inset-0 pointer-events-none" style={{ background: 'rgba(26,58,92,0.75)' }} />
+    <section id="sujets" className="py-24 relative overflow-hidden" style={{ background: '#945790' }}>
       <span className="deco-number text-white right-0 top-0">02</span>
       <div className="container relative z-10">
         <div ref={ref}>
@@ -107,7 +95,7 @@ export function SujetsSection({ lang }: { lang: Lang }) {
                 <div className="w-8 h-8 rounded-full bg-sky-500/20 flex items-center justify-center shrink-0">
                   <span className="text-sky-400 text-xs font-bold">{String(i + 1).padStart(2, '0')}</span>
                 </div>
-                <span className="text-white font-medium">{item}</span>
+                <span className="text-white font-bold">{item}</span>
                 <ArrowRight size={16} className="ml-auto text-sky-400 opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
             ))}
@@ -233,7 +221,7 @@ export function AProposSection({ lang }: { lang: Lang }) {
   const ref = useReveal();
 
   return (
-    <section id="apropos" className="py-24 relative overflow-hidden" style={{ background: '#1e4570' }}>
+    <section id="apropos" className="py-24 relative overflow-hidden" style={{ background: '#945790' }}>
       <span className="deco-number text-white right-0 top-0">05</span>
       <div className="container relative z-10">
         <div ref={ref}>
@@ -250,7 +238,7 @@ export function AProposSection({ lang }: { lang: Lang }) {
             <div>
               <div className="space-y-4">
                 {t.paragraphs.map((p, i) => (
-                  <p key={i} className="text-slate-300 leading-relaxed">{p}</p>
+                  <p key={i} className="text-white font-semibold leading-relaxed">{p}</p>
                 ))}
               </div>
             </div>
@@ -265,7 +253,7 @@ export function AProposSection({ lang }: { lang: Lang }) {
               </div>
               <div className="space-y-4">
                 {t.positioningText.map((p, i) => (
-                  <p key={i} className="text-slate-300 leading-relaxed text-sm">{p}</p>
+                  <p key={i} className="text-white font-semibold leading-relaxed text-sm">{p}</p>
                 ))}
               </div>
             </div>
@@ -429,11 +417,11 @@ export function Footer({ lang }: { lang: Lang }) {
   const t = content[lang].footer;
 
   return (
-    <footer style={{ background: '#162d4a' }} className="py-10">
+    <footer style={{ background: '#6d2669' }} className="py-10">
       <div className="container">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <img
-            src="/manus-storage/logo-novaxone-blanc_db8a4bee.png"
+            src="/uploads/logo-novaxone-blanc.png"
             alt="NovaXone"
             className="h-8 object-contain opacity-80"
           />
@@ -472,7 +460,7 @@ export function Footer({ lang }: { lang: Lang }) {
               </svg>
             </a>
           </div>
-          <p className="text-slate-500 text-sm">{t.copy}</p>
+          <p className="text-sm" style={{ color: '#faf5f5' }}>{t.copy}</p>
         </div>
       </div>
     </footer>
