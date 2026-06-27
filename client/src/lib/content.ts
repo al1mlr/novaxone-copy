@@ -113,7 +113,7 @@ export const content = {
     },
     contact: {
       title: 'Contact',
-      address: '5 Rue Davioud\n75016 Paris\n+33 9 72 33 69 95',
+      address: '5 Rue Davioud\n75016 Paris\n FRANCE',
       form: {
         name: 'Nom',
         email: 'Email',
