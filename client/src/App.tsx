@@ -5,11 +5,23 @@ import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
+import BlogListPage from "./pages/BlogListPage";
+import BlogPostPage from "./pages/BlogPostPage";
 
 function Router() {
   return (
     <Switch>
+      {/* Home */}
       <Route path={"/"} component={Home} />
+
+      {/* Blog FR */}
+      <Route path={"/blog"} component={() => <BlogListPage lang="fr" />} />
+      <Route path={"/blog/:slug"} component={({ params }) => <BlogPostPage lang="fr" slug={params.slug} />} />
+
+      {/* Blog EN */}
+      <Route path={"/en/blog"} component={() => <BlogListPage lang="en" />} />
+      <Route path={"/en/blog/:slug"} component={({ params }) => <BlogPostPage lang="en" slug={params.slug} />} />
+
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>

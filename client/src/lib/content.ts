@@ -51,12 +51,12 @@ export const content = {
     expertises: {
       title: 'Domaines d\'excellence',
       items: [
-        'Marketing Stratégique',
-        'Analyse des timings de marché',
-        'Conception d\'offres numériques',
-        'Organisation éditeur de logiciel',
-        'Amélioration de l\'efficacité opérationnelle',
-        'Business Planning',
+        { title: 'Marketing Stratégique', description: 'Définir le positionnement, la proposition de valeur et la segmentation pour maximiser l\'impact commercial.' },
+        { title: 'Analyse des timings de marché', description: 'Identifier le bon moment pour lancer, pivoter ou accélérer selon les cycles et signaux du marché.' },
+        { title: 'Conception d\'offres numériques', description: 'Structurer des offres logicielles et SaaS alignées sur les besoins clients et les réalités concurrentielles.' },
+        { title: 'Organisation éditeur de logiciel', description: 'Aligner les fonctions R&D, marketing, ventes et services pour une exécution fluide et scalable.' },
+        { title: 'Amélioration de l\'efficacité opérationnelle', description: 'Diagnostiquer les blocages, réduire les frictions et améliorer la livraison produit et la rentabilité.' },
+        { title: 'Développement International', description: 'Préparer et exécuter l\'expansion vers de nouveaux marchés en Europe, Amériques et en Asie avec notre réseau de partenaires.' },
       ],
       cta: 'En savoir plus',
     },
@@ -124,7 +124,7 @@ export const content = {
       map: 'Voir la carte',
     },
     footer: {
-      copy: '© Novaxone — 2015',
+      copy: `© Novaxone — ${new Date().getFullYear()}`,
     },
   },
   en: {
@@ -175,12 +175,12 @@ export const content = {
     expertises: {
       title: 'Domains of Excellence',
       items: [
-        'Market Strategy',
-        'Market Timing Analysis',
-        'Product Management',
-        'Software Vendor Organization',
-        'Operational Efficiency',
-        'Business Planning',
+        { title: 'Market Strategy', description: 'Define positioning, value proposition and segmentation to maximize commercial impact.' },
+        { title: 'Market Timing Analysis', description: 'Identify the right moment to launch, pivot or accelerate based on market cycles and signals.' },
+        { title: 'Product Management', description: 'Structure software and SaaS offerings aligned with customer needs and competitive realities.' },
+        { title: 'Software Vendor Organization', description: 'Align R&D, marketing, sales and services functions for smooth and scalable execution.' },
+        { title: 'Operational Efficiency', description: 'Diagnose bottlenecks, reduce friction and improve product delivery and profitability.' },
+        { title: 'International Development', description: 'Prepare and execute expansion into new markets in Europe, Americas and Asia with our partner network.' },
       ],
       cta: 'Contact us',
     },
@@ -237,7 +237,7 @@ export const content = {
     },
     contact: {
       title: 'Contact',
-      address: '5 Rue Davioud\n75016 Paris\n+33 9 72 33 69 95',
+      address: '5 Rue Davioud\n75016 Paris\nFRANCE',
       form: {
         name: 'Name',
         email: 'Email',
@@ -248,7 +248,7 @@ export const content = {
       map: 'View map',
     },
     footer: {
-      copy: '© Novaxone — 2015',
+      copy: `© Novaxone — ${new Date().getFullYear()}`,
     },
   },
 };

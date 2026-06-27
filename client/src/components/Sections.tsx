@@ -135,17 +135,24 @@ export function ExpertisesSection({ lang }: { lang: Lang }) {
           </h2>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {t.items.map((item, i) => (
-              <div
-                key={i}
-                className="bg-white rounded-xl p-6 service-card shadow-sm hover:shadow-md transition-all"
-              >
-                <div className="text-3xl font-bold text-sky-100 mb-3" style={{ fontFamily: "'Syne', sans-serif" }}>
-                  {String(i + 1).padStart(2, '0')}
+            {t.items.map((item, i) => {
+              const title = typeof item === 'string' ? item : item.title;
+              const description = typeof item === 'string' ? undefined : item.description;
+              return (
+                <div
+                  key={i}
+                  className="bg-white rounded-xl p-6 service-card shadow-sm hover:shadow-md transition-all"
+                >
+                  <div className="text-3xl font-bold text-sky-100 mb-3" style={{ fontFamily: "'Syne', sans-serif" }}>
+                    {String(i + 1).padStart(2, '0')}
+                  </div>
+                  <h3 className="text-slate-800 font-semibold text-base leading-snug mb-2">{title}</h3>
+                  {description && (
+                    <p className="text-slate-500 text-sm leading-relaxed">{description}</p>
+                  )}
                 </div>
-                <h3 className="text-slate-800 font-semibold text-base leading-snug">{item}</h3>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           <div className="mt-10">
@@ -275,13 +282,19 @@ export function ContactSection({ lang }: { lang: Lang }) {
     e.preventDefault();
     setFormStatus('sending');
     const formData = new FormData(e.currentTarget);
+    // Web3Forms — replace WEB3FORMS_ACCESS_KEY with your key from https://web3forms.com
+    formData.append('access_key', '3b2194ec-91cd-4088-ab6b-49b53c87c196');
+    formData.append('subject', `[NovaXone] ${formData.get('subject') || 'Nouveau message'}`);
+    formData.append('from_name', 'Site NovaXone');
+    formData.append('redirect', 'false');
     try {
-      const res = await fetch('https://formspree.io/f/xpwrqkgv', {
+      const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         body: formData,
         headers: { Accept: 'application/json' },
       });
-      if (res.ok) {
+      const data = await res.json();
+      if (data.success) {
         setFormStatus('sent');
         (e.target as HTMLFormElement).reset();
       } else {
@@ -308,8 +321,7 @@ export function ContactSection({ lang }: { lang: Lang }) {
           <div className="grid lg:grid-cols-2 gap-16">
             {/* Form */}
             <form onSubmit={handleSubmit} className="space-y-4">
-              <input type="hidden" name="_to" value="sales@novaxone.com" />
-              <input type="hidden" name="_subject" value="Nouveau message depuis le site NovaXone" />
+              {/* Web3Forms: email destination configured via access_key linked to info@novaxone.com */}
               <div className="grid sm:grid-cols-2 gap-4">
                 <input
                   type="text"
@@ -341,7 +353,7 @@ export function ContactSection({ lang }: { lang: Lang }) {
               />
               {formStatus === 'sent' && (
                 <div className="bg-emerald-50 border border-emerald-200 text-emerald-700 px-4 py-3 rounded-xl text-sm font-medium">
-                  {lang === 'fr' ? '✓ Message envoyé avec succès à sales@novaxone.com' : '✓ Message sent successfully to sales@novaxone.com'}
+                  {lang === 'fr' ? '✓ Message envoyé avec succès ! Nous vous répondrons rapidement.' : '✓ Message sent successfully! We will get back to you shortly.'}
                 </div>
               )}
               {formStatus === 'error' && (
@@ -378,8 +390,7 @@ export function ContactSection({ lang }: { lang: Lang }) {
                   <Phone size={18} className="text-sky-500" />
                 </div>
                 <div>
-                  <p className="text-slate-400 text-sm mb-1 font-medium uppercase tracking-wide">Téléphone</p>
-                  <p className="text-slate-700">+33 9 72 33 69 95</p>
+                  <p className="text-slate-700">+33 972 33 69 95</p>
                 </div>
               </div>
               <div className="flex items-start gap-4">
@@ -388,7 +399,7 @@ export function ContactSection({ lang }: { lang: Lang }) {
                 </div>
                 <div>
                   <p className="text-slate-400 text-sm mb-1 font-medium uppercase tracking-wide">Email</p>
-                  <p className="text-slate-700">contact@novaxone.com</p>
+                  <p className="text-slate-700">info@novaxone.com</p>
                 </div>
               </div>
 

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLocation } from 'wouter';
 import { type Lang } from '@/lib/content';
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
@@ -11,27 +12,18 @@ import {
   ContactSection,
   Footer,
 } from '@/components/Sections';
-import BlogPage from '@/components/BlogPage';
 
 export default function Home() {
   const [lang, setLang] = useState<Lang>('fr');
-  const [showBlog, setShowBlog] = useState(false);
+  const [, setLocation] = useLocation();
 
-  if (showBlog) {
-    return (
-      <>
-        <Navbar lang={lang} onLangChange={setLang} onBlogClick={() => setShowBlog(false)} />
-        <div className="pt-16">
-          <BlogPage key={lang} lang={lang} onBack={() => setShowBlog(false)} />
-        </div>
-        <Footer lang={lang} />
-      </>
-    );
-  }
+  const handleBlogClick = () => {
+    setLocation(lang === 'fr' ? '/blog' : '/en/blog');
+  };
 
   return (
     <>
-      <Navbar lang={lang} onLangChange={setLang} onBlogClick={() => setShowBlog(true)} />
+      <Navbar lang={lang} onLangChange={setLang} onBlogClick={handleBlogClick} />
       <main>
         <HeroSection lang={lang} />
         <DemarcheSection lang={lang} />

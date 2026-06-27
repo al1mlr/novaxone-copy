@@ -5,6 +5,7 @@
 
 [build.environment]
   NODE_VERSION = "20"
+  VITE_SITE_URL = "https://www.novaxone.com"
 
 # Redirects pour le routage React (SPA)
 [[redirects]]
