@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Page d'accueil FR -->
+  <url>
+    <loc>https://www.novaxone.com/</loc>
+    <lastmod>2026-06-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.novaxone.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.novaxone.com/?lang=en"/>
+  </url>
+
+  <!-- Blog FR — liste -->
+  <url>
+    <loc>https://www.novaxone.com/blog</loc>
+    <lastmod>2026-06-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Blog EN — liste -->
+  <url>
+    <loc>https://www.novaxone.com/en/blog</loc>
+    <lastmod>2026-06-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Articles FR -->
+  <url>
+    <loc>https://www.novaxone.com/blog/2016-03-28-conference-timing-partie-1</loc>
+    <lastmod>2016-03-28</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.novaxone.com/blog/2016-03-28-conference-timing-partie-2</loc>
+    <lastmod>2016-03-28</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.novaxone.com/blog/2016-03-28-conference-timing-partie-3</loc>
+    <lastmod>2016-03-28</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.novaxone.com/blog/2017-06-24-logique-produit</loc>
+    <lastmod>2017-06-24</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.novaxone.com/blog/2018-04-13-reaction-rapport-villani</loc>
+    <lastmod>2018-04-13</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.novaxone.com/blog/2019-03-09-ia-prothese-orthese</loc>
+    <lastmod>2019-03-09</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Articles EN -->
+  <url>
+    <loc>https://www.novaxone.com/en/blog/2018-06-10-ai-story-1</loc>
+    <lastmod>2018-06-10</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.novaxone.com/en/blog/2018-07-15-ai-story-timing</loc>
+    <lastmod>2018-07-15</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.novaxone.com/en/blog/2018-08-19-ai-story-2</loc>
+    <lastmod>2018-08-19</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+</urlset>
