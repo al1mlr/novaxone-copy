@@ -18,7 +18,7 @@ L'innovation que constitue le cahier de laboratoire électronique amène pourtan
 
 
 
-![The mess of current lab notebook](/uploads/image1.png) 
+[The mess of current lab notebook](/uploads/image1.png) 
 
 
 **Le cahier de laboratoire papier : pain problems**
