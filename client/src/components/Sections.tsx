@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { content, type Lang } from '@/lib/content';
-import { CheckCircle2, ArrowRight, MapPin, Phone, Mail } from 'lucide-react';
+import { CheckCircle2, ArrowRight, MapPin, Mail } from 'lucide-react';
 
 // Hook for scroll reveal
 function useReveal() {
@@ -374,32 +374,23 @@ export function ContactSection({ lang }: { lang: Lang }) {
 
             {/* Address */}
             <div className="space-y-6">
+              {/* Adresse postale */}
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 rounded-xl bg-sky-100 flex items-center justify-center shrink-0">
                   <MapPin size={18} className="text-sky-500" />
                 </div>
                 <div>
-                  <p className="text-slate-400 text-sm mb-1 font-medium uppercase tracking-wide">Adresse</p>
-                  {t.address.split('\n').map((line, i) => (
-                    <p key={i} className="text-slate-700">{line}</p>
-                  ))}
+                  <p className="text-slate-700">{t.address}</p>
+                  <p className="text-slate-700 font-semibold">{t.country}</p>
                 </div>
               </div>
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-xl bg-sky-100 flex items-center justify-center shrink-0">
-                  <Phone size={18} className="text-sky-500" />
-                </div>
-                <div>
-                  <p className="text-slate-700">+33 972 33 69 95</p>
-                </div>
-              </div>
+              {/* Email */}
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 rounded-xl bg-sky-100 flex items-center justify-center shrink-0">
                   <Mail size={18} className="text-sky-500" />
                 </div>
                 <div>
-                  <p className="text-slate-400 text-sm mb-1 font-medium uppercase tracking-wide">Email</p>
-                  <p className="text-slate-700">info@novaxone.com</p>
+                  <p className="text-slate-700">{t.email}</p>
                 </div>
               </div>
 

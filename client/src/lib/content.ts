@@ -113,7 +113,9 @@ export const content = {
     },
     contact: {
       title: 'Contact',
-      address: '5 Rue Davioud\n75016 Paris\n FRANCE',
+      address: '5 Rue Davioud, 75016 Paris',
+      country: 'FRANCE',
+      email: 'info@novaxone.com',
       form: {
         name: 'Nom',
         email: 'Email',
@@ -237,7 +239,9 @@ export const content = {
     },
     contact: {
       title: 'Contact',
-      address: '5 Rue Davioud\n75016 Paris\nFRANCE',
+      address: '5 Rue Davioud, 75016 Paris',
+      country: 'FRANCE',
+      email: 'info@novaxone.com',
       form: {
         name: 'Name',
         email: 'Email',

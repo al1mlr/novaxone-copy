@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useLocation } from 'wouter';
 import { content, type Lang } from '@/lib/content';
 
 interface NavbarProps {
@@ -11,6 +12,8 @@ export default function Navbar({ lang, onLangChange, onBlogClick }: NavbarProps)
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const t = content[lang].nav;
+  const [location] = useLocation();
+  const isOnBlog = location.startsWith('/blog') || location.startsWith('/en/blog');
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -20,6 +23,12 @@ export default function Navbar({ lang, onLangChange, onBlogClick }: NavbarProps)
 
   const scrollTo = (id: string) => {
     setMenuOpen(false);
+    if (isOnBlog) {
+      // Navigate to home page with anchor hash, preserving language
+      const langParam = lang === 'en' ? '?lang=en' : '';
+      window.location.href = `/${langParam}${id !== 'hero' ? '#' + id : ''}`;
+      return;
+    }
     const el = document.getElementById(id);
     if (el) {
       const offset = 80;
@@ -45,7 +54,7 @@ export default function Navbar({ lang, onLangChange, onBlogClick }: NavbarProps)
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <button
-            onClick={() => scrollTo('hero')}
+            onClick={() => isOnBlog ? (window.location.href = lang === 'en' ? '/?lang=en' : '/') : scrollTo('hero')}
             className="flex items-center gap-2 focus:outline-none"
           >
             <img
