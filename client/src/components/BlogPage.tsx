@@ -90,8 +90,8 @@ async function loadPosts(lang: Lang): Promise<BlogPost[]> {
 function renderMarkdown(md: string) {
   const blocks = md.split(/\n\n+/);
   return blocks.map((block, i) => {
-    // YouTube embed: [youtube:VIDEO_ID] or [youtube:videoseries?list=PLAYLIST_ID]
-    const ytMatch = block.trim().match(/^\[youtube:([A-Za-z0-9_?=&%-]+)\]$/);
+    // YouTube embed: [youtube:VIDEO_ID] or \[youtube:VIDEO_ID] (backslash added by some editors)
+    const ytMatch = block.trim().match(/^\\?\[youtube:([A-Za-z0-9_?=&%-]+)\]$/);
     if (ytMatch) {
       return (
         <div key={i} className="my-8 rounded-xl overflow-hidden shadow-lg" style={{ position: 'relative', paddingBottom: '56.25%', height: 0 }}>

@@ -71,8 +71,8 @@ function renderMarkdown(md: string) {
   while (i < lines.length) {
     const line = lines[i];
 
-    // YouTube embed
-    const ytMatch = line.match(/^\[youtube:([\w?=&-]+)\]$/);
+    // YouTube embed: [youtube:ID] or \[youtube:ID] (backslash added by some editors)
+    const ytMatch = line.match(/^\\?\[youtube:([\w?=&%-]+)\]$/);
     if (ytMatch) {
       const videoId = ytMatch[1];
       const src = videoId.startsWith('videoseries')
