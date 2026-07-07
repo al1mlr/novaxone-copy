@@ -30,7 +30,7 @@ L'innovation que constitue le cahier de laboratoire électronique amène pourtan
 * Inadaptation à l'évolution des méthodes et moyens utilisés en R&D (volume des données, informatisation, travail en groupe…)
 * ….
 
-![Just a nightmare !](/uploads/image_thumb2.png)
+![Just a nightmare...](/uploads/image_thumb2.png)
 
 **Les avantages du cahier de laboratoire électronique (a priori)**
 
