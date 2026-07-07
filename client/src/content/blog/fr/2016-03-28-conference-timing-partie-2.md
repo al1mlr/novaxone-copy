@@ -16,10 +16,9 @@ published: true
 
 L'innovation que constitue le cahier de laboratoire électronique amène pourtant des solutions aux problèmes que posent les cahiers de laboratoires papier (les "pain problems") et pourtant leur adoption n'a pas décollé pendant de nombreuses années. On peut se douter que l'idée de remplacer un cahier papier à la tenue fastidieuse par une application informatique n'est pas une idée récente ! Et pourtant en 2004, les milliers de chercheurs en sciences expérimentales dans le monde entier, l'utilise à … 98%.
 
+![The notebook](/uploads/image1.png "The mess of current lab notebook")
 
-
-[![The mess of current lab notebook](/uploads/image1.png)]
-
+"The current mess"
 
 **Le cahier de laboratoire papier : pain problems**
 
