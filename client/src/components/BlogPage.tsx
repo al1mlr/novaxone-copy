@@ -172,6 +172,23 @@ function renderMarkdown(md: string) {
         </ol>
       );
     }
+    // Standalone image: ![alt](url) or ![alt](url "title") on its own line
+    const standaloneImg = block.trim().match(/^!\[(.*?)\]\((.*?)(?:\s+".*?")?\)$/);
+    if (standaloneImg) {
+      return (
+        <figure key={i} className="my-8 text-center">
+          <img
+            src={standaloneImg[2]}
+            alt={standaloneImg[1]}
+            className="max-w-full mx-auto rounded-xl shadow-md"
+            loading="lazy"
+          />
+          {standaloneImg[1] && (
+            <figcaption className="text-slate-400 text-sm mt-2 italic">{standaloneImg[1]}</figcaption>
+          )}
+        </figure>
+      );
+    }
     // Tags line (starts with "Tags :")
     if (block.startsWith('Tags :') || block.startsWith('Tags:')) {
       return (
@@ -189,16 +206,23 @@ function renderMarkdown(md: string) {
   });
 }
 
-// Render inline Markdown (bold, italic, links)
+// Render inline Markdown (bold, italic, images, links)
 function renderInline(text: string): React.ReactNode {
-  // Split by bold/italic/link patterns
-  const parts = text.split(/(\*\*.*?\*\*|\*.*?\*|\[.*?\]\(.*?\))/g);
+  // Split by bold/italic/image/link patterns
+  const parts = text.split(/(\*\*.*?\*\*|\*.*?\*|!\[.*?\]\(.*?\)|\[.*?\]\(.*?\))/g);
   return parts.map((part, i) => {
     if (part.startsWith('**') && part.endsWith('**')) {
       return <strong key={i} className="text-slate-800 font-semibold">{part.slice(2, -2)}</strong>;
     }
     if (part.startsWith('*') && part.endsWith('*') && !part.startsWith('**')) {
       return <em key={i}>{part.slice(1, -1)}</em>;
+    }
+    // Image: ![alt](url) or ![alt](url "title")
+    const imgMatch = part.match(/^!\[(.*?)\]\((.*?)(?:\s+".*?")?\)$/);
+    if (imgMatch) {
+      return (
+        <img key={i} src={imgMatch[2]} alt={imgMatch[1]} className="max-w-full rounded-xl my-4" loading="lazy" />
+      );
     }
     const linkMatch = part.match(/^\[(.*?)\]\((.*?)\)$/);
     if (linkMatch) {
