@@ -160,6 +160,25 @@ function renderMarkdown(md: string) {
       i++; continue;
     }
 
+    // Standalone image: ![alt](url) or ![alt](url "title")
+    const imgMatch = line.trim().match(/^!\[(.*?)\]\((.*?)(?:\s+".*?")?\)$/);
+    if (imgMatch) {
+      elements.push(
+        <figure key={i} className="my-8 text-center">
+          <img
+            src={imgMatch[2]}
+            alt={imgMatch[1]}
+            className="max-w-full mx-auto rounded-xl shadow-md"
+            loading="lazy"
+          />
+          {imgMatch[1] && (
+            <figcaption className="text-slate-400 text-sm mt-2 italic">{imgMatch[1]}</figcaption>
+          )}
+        </figure>
+      );
+      i++; continue;
+    }
+
     // Empty line
     if (line.trim() === '') { i++; continue; }
 
@@ -176,10 +195,15 @@ function renderMarkdown(md: string) {
 }
 
 function renderInline(text: string): React.ReactNode[] {
-  const parts = text.split(/(\*\*.*?\*\*|\*.*?\*|\[.*?\]\(.*?\))/g);
+  const parts = text.split(/(\*\*.*?\*\*|\*.*?\*|!\[.*?\]\(.*?\)|\[.*?\]\(.*?\))/g);
   return parts.map((part, i) => {
     if (part.startsWith('**') && part.endsWith('**')) return <strong key={i}>{part.slice(2, -2)}</strong>;
     if (part.startsWith('*') && part.endsWith('*')) return <em key={i}>{part.slice(1, -1)}</em>;
+    // Image inline: ![alt](url) or ![alt](url "title")
+    const imgMatch = part.match(/^!\[(.*?)\]\((.*?)(?:\s+".*?")?\)$/);
+    if (imgMatch) {
+      return <img key={i} src={imgMatch[2]} alt={imgMatch[1]} className="max-w-full rounded-xl my-4" loading="lazy" />;
+    }
     const linkMatch = part.match(/^\[(.*?)\]\((.*?)\)$/);
     if (linkMatch) {
       return (
