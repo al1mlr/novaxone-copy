@@ -34,7 +34,7 @@ export default function HeroSection({ lang }: HeroSectionProps) {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center overflow-hidden"
+      className="relative min-h-screen flex items-center"
       style={{
         background: 'linear-gradient(135deg, rgba(110,43,98,0.40) 0%, rgba(130,55,115,0.35) 45%, rgba(150,65,130,0.30) 100%)',
         backgroundColor: '#e0cedd',
@@ -110,7 +110,7 @@ export default function HeroSection({ lang }: HeroSectionProps) {
             style={{
               fontFamily: "'Syne', sans-serif",
               fontSize: 'clamp(2.5rem, 6vw, 5rem)',
-              fontWeight: 900,
+              fontWeight: 800,
               lineHeight: 1.2,
               paddingBottom: '0.1em',
             }}

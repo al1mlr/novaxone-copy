@@ -2,6 +2,7 @@
   base = "client"
   command = "npm install --legacy-peer-deps && npx vite build --config ../vite.config.netlify.ts"
   publish = "dist"
+  edge_functions = "netlify/edge-functions"
 
 [build.environment]
   NODE_VERSION = "20"

@@ -116,7 +116,7 @@
   .deco-number {
     font-family: 'Syne', sans-serif;
     font-size: clamp(6rem, 15vw, 14rem);
-    font-weight: 900;
+    font-weight: 800;
     line-height: 1;
     opacity: 0.04;
     position: absolute;

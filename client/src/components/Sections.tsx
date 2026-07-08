@@ -28,8 +28,8 @@ export function DemarcheSection({ lang }: { lang: Lang }) {
   const textColors = ['text-sky-600', 'text-indigo-600', 'text-emerald-600'];
 
   return (
-    <section id="demarche" className="py-24 bg-white relative overflow-hidden">
-      <span className="deco-number text-slate-900 right-0 top-0">01</span>
+    <section id="demarche" className="py-24 bg-white relative">
+      <span className="deco-number text-slate-900 right-0 top-0" style={{ overflow: 'hidden', display: 'block', position: 'absolute', right: 0, top: 0 }}>01</span>
       <div className="container relative z-10">
         <div ref={ref}>
           <div className="flex items-center gap-3 mb-4">
@@ -48,7 +48,7 @@ export function DemarcheSection({ lang }: { lang: Lang }) {
                 <div className={`inline-flex items-center justify-center w-10 h-10 rounded-xl ${colors[i]} text-white font-bold text-lg mb-5`}>
                   {i + 1}
                 </div>
-                <h3 className={`text-xl font-bold mb-4 ${textColors[i]}`} style={{ fontFamily: "'Syne', sans-serif" }}>
+                <h3 className={`text-xl font-bold mb-4 ${textColors[i]}`} style={{ fontFamily: "'Syne', sans-serif", paddingBottom: '0.1em' }}>
                   {phase.title}
                 </h3>
                 <ul className="space-y-2">
@@ -74,8 +74,8 @@ export function SujetsSection({ lang }: { lang: Lang }) {
   const ref = useReveal();
 
   return (
-    <section id="sujets" className="py-24 relative overflow-hidden" style={{ background: '#945790' }}>
-      <span className="deco-number text-white right-0 top-0">02</span>
+    <section id="sujets" className="py-24 relative" style={{ background: '#945790' }}>
+      <span className="deco-number text-white right-0 top-0" style={{ overflow: 'hidden', display: 'block', position: 'absolute', right: 0, top: 0 }}>02</span>
       <div className="container relative z-10">
         <div ref={ref}>
           <div className="flex items-center gap-3 mb-4">
@@ -122,8 +122,8 @@ export function ExpertisesSection({ lang }: { lang: Lang }) {
   const ref = useReveal();
 
   return (
-    <section id="expertises" className="py-24 bg-slate-50 relative overflow-hidden">
-      <span className="deco-number text-slate-900 right-0 top-0">03</span>
+    <section id="expertises" className="py-24 bg-slate-50 relative">
+      <span className="deco-number text-slate-900 right-0 top-0" style={{ overflow: 'hidden', display: 'block', position: 'absolute', right: 0, top: 0 }}>03</span>
       <div className="container relative z-10">
         <div ref={ref}>
           <div className="flex items-center gap-3 mb-4">
@@ -143,7 +143,7 @@ export function ExpertisesSection({ lang }: { lang: Lang }) {
                   key={i}
                   className="bg-white rounded-xl p-6 service-card shadow-sm hover:shadow-md transition-all"
                 >
-                  <div className="text-3xl font-bold text-sky-100 mb-3" style={{ fontFamily: "'Syne', sans-serif" }}>
+                  <div className="text-3xl font-bold text-sky-100 mb-3" style={{ fontFamily: "'Syne', sans-serif", paddingBottom: '0.1em' }}>
                     {String(i + 1).padStart(2, '0')}
                   </div>
                   <h3 className="text-slate-800 font-semibold text-base leading-snug mb-2">{title}</h3>
@@ -176,8 +176,8 @@ export function ClientsSection({ lang }: { lang: Lang }) {
   const ref = useReveal();
 
   return (
-    <section id="clients" className="py-24 bg-white relative overflow-hidden">
-      <span className="deco-number text-slate-900 right-0 top-0">04</span>
+    <section id="clients" className="py-24 bg-white relative">
+      <span className="deco-number text-slate-900 right-0 top-0" style={{ overflow: 'hidden', display: 'block', position: 'absolute', right: 0, top: 0 }}>04</span>
       <div className="container relative z-10">
         <div ref={ref}>
           <div className="flex items-center gap-3 mb-4">
@@ -228,8 +228,8 @@ export function AProposSection({ lang }: { lang: Lang }) {
   const ref = useReveal();
 
   return (
-    <section id="apropos" className="py-24 relative overflow-hidden" style={{ background: '#945790' }}>
-      <span className="deco-number text-white right-0 top-0">05</span>
+    <section id="apropos" className="py-24 relative" style={{ background: '#945790' }}>
+      <span className="deco-number text-white right-0 top-0" style={{ overflow: 'hidden', display: 'block', position: 'absolute', right: 0, top: 0 }}>05</span>
       <div className="container relative z-10">
         <div ref={ref}>
           <div className="flex items-center gap-3 mb-4">
@@ -306,8 +306,8 @@ export function ContactSection({ lang }: { lang: Lang }) {
   };
 
   return (
-    <section id="contact" className="py-24 bg-slate-50 relative overflow-hidden">
-      <span className="deco-number text-slate-900 right-0 top-0">07</span>
+    <section id="contact" className="py-24 bg-slate-50 relative">
+      <span className="deco-number text-slate-900 right-0 top-0" style={{ overflow: 'hidden', display: 'block', position: 'absolute', right: 0, top: 0 }}>07</span>
       <div className="container relative z-10">
         <div ref={ref}>
           <div className="flex items-center gap-3 mb-4">
