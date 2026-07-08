@@ -145,6 +145,14 @@
     box-shadow: 0 12px 32px oklch(0.22 0.07 255 / 0.12);
   }
 
+  /* Prevent descender clipping on all Syne headings (g, p, y, q)
+     line-height alone is not enough — padding-bottom ensures the descenders
+     are never cut by a tight container or a card with overflow:hidden */
+  h1, h2, h3, h4, h5, h6 {
+    overflow: visible;
+    padding-bottom: 0.15em;
+  }
+
   /* Nav link underline animation */
   .nav-link {
     position: relative;
