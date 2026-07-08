@@ -1,4 +1,22 @@
 @import "tailwindcss";
+/* ─── Polices locales — DM Sans (sans problème de descendantes) ─── */
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url('/fonts/dmsans-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url('/fonts/dmsans-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
@@ -7,7 +25,7 @@
  * DESIGN SYSTEM — NovaXone "Editorial Tech"
  * Movement: Magazine éditorial contemporain meets cabinet de conseil premium
  * Palette: Bleu nuit (#1B2A4A) + Blanc pur + Turquoise (#0EA5E9) + Or (#C9A84C)
- * Typography: Syne (titres, géométrique moderne) + Inter (corps)
+ * Typography: DM Sans (titres, géométrique moderne) + Inter (corps)
  */
 
 @theme inline {
@@ -74,7 +92,7 @@
     font-family: 'Inter', sans-serif;
   }
   h1, h2, h3 {
-    font-family: 'Syne', sans-serif;
+    font-family: 'DM Sans', sans-serif;
   }
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
@@ -114,7 +132,7 @@
 
   /* Editorial decorative number */
   .deco-number {
-    font-family: 'Syne', sans-serif;
+    font-family: 'DM Sans', sans-serif;
     font-size: clamp(6rem, 15vw, 14rem);
     font-weight: 800;
     line-height: 1;
@@ -149,8 +167,9 @@
      line-height alone is not enough — padding-bottom ensures the descenders
      are never cut by a tight container or a card with overflow:hidden */
   h1, h2, h3, h4, h5, h6 {
-    overflow: visible;
-    padding-bottom: 0.15em;
+    overflow: visible !important;
+    padding-bottom: 0.4em;
+    line-height: 1.4;
   }
 
   /* Nav link underline animation */

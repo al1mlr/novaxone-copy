@@ -1,4 +1,4 @@
-// Design: Editorial Tech — Syne font, #2a5080 blue, clean white background
+// Design: Editorial Tech — DM Sans font, #2a5080 blue, clean white background
 // Blog articles are loaded from Markdown files in /src/content/blog/fr/ and /src/content/blog/en/
 // Frontmatter is parsed manually from raw string imports (no Vite plugin needed)
 
@@ -108,7 +108,7 @@ function renderMarkdown(md: string) {
     // Heading 2
     if (block.startsWith('## ')) {
       return (
-        <h2 key={i} className="text-slate-900 text-2xl font-bold mt-10 mb-4" style={{ fontFamily: "'Syne', sans-serif" }}>
+        <h2 key={i} className="text-slate-900 text-2xl font-bold mt-10 mb-4" style={{ fontFamily: "'DM Sans', sans-serif" }}>
           {block.replace(/^## /, '')}
         </h2>
       );
@@ -116,7 +116,7 @@ function renderMarkdown(md: string) {
     // Heading 3
     if (block.startsWith('### ')) {
       return (
-        <h3 key={i} className="text-slate-900 text-xl font-bold mt-8 mb-3" style={{ fontFamily: "'Syne', sans-serif" }}>
+        <h3 key={i} className="text-slate-900 text-xl font-bold mt-8 mb-3" style={{ fontFamily: "'DM Sans', sans-serif" }}>
           {block.replace(/^### /, '')}
         </h3>
       );
@@ -124,7 +124,7 @@ function renderMarkdown(md: string) {
     // Heading 4 (####)
     if (block.startsWith('#### ')) {
       return (
-        <h4 key={i} className="text-slate-900 text-lg font-bold mt-7 mb-3" style={{ fontFamily: "'Syne', sans-serif" }}>
+        <h4 key={i} className="text-slate-900 text-lg font-bold mt-7 mb-3" style={{ fontFamily: "'DM Sans', sans-serif" }}>
           {block.replace(/^#### /, '')}
         </h4>
       );
@@ -132,7 +132,7 @@ function renderMarkdown(md: string) {
     // Heading 5 (#####)
     if (block.startsWith('##### ')) {
       return (
-        <h5 key={i} className="text-slate-700 text-base font-semibold mt-6 mb-2 italic" style={{ fontFamily: "'Syne', sans-serif" }}>
+        <h5 key={i} className="text-slate-700 text-base font-semibold mt-6 mb-2 italic" style={{ fontFamily: "'DM Sans', sans-serif" }}>
           {renderInline(block.replace(/^##### /, ''))}
         </h5>
       );
@@ -140,7 +140,7 @@ function renderMarkdown(md: string) {
     // Bold-only line as heading
     if (/^\*\*[^*]+\*\*$/.test(block.trim())) {
       return (
-        <h3 key={i} className="text-slate-900 text-xl font-bold mt-8 mb-3" style={{ fontFamily: "'Syne', sans-serif" }}>
+        <h3 key={i} className="text-slate-900 text-xl font-bold mt-8 mb-3" style={{ fontFamily: "'DM Sans', sans-serif" }}>
           {block.trim().replace(/\*\*/g, '')}
         </h3>
       );
@@ -326,7 +326,7 @@ export default function BlogPage({ lang, onBack }: BlogPageProps) {
             </div>
             <h1
               className="text-white text-3xl md:text-4xl lg:text-5xl font-bold max-w-3xl"
-              style={{ fontFamily: "'Syne', sans-serif" }}
+              style={{ fontFamily: "'DM Sans', sans-serif" }}
             >
               {selectedPost.title}
             </h1>
@@ -358,7 +358,7 @@ export default function BlogPage({ lang, onBack }: BlogPageProps) {
               <div className="mt-10 pt-8 border-t border-slate-200">
                 <h4
                   className="text-slate-700 font-semibold mb-4 text-sm uppercase tracking-wider"
-                  style={{ fontFamily: "'Syne', sans-serif" }}
+                  style={{ fontFamily: "'DM Sans', sans-serif" }}
                 >
                   {lang === 'fr' ? 'Références' : 'References'}
                 </h4>
@@ -404,7 +404,7 @@ export default function BlogPage({ lang, onBack }: BlogPageProps) {
           </div>
           <h1
             className="text-white text-4xl md:text-5xl font-bold"
-            style={{ fontFamily: "'Syne', sans-serif" }}
+            style={{ fontFamily: "'DM Sans', sans-serif" }}
           >
             {t.title}
           </h1>
@@ -460,7 +460,7 @@ export default function BlogPage({ lang, onBack }: BlogPageProps) {
                 <div className="p-6 flex flex-col flex-1">
                   <h2
                     className="text-slate-900 font-bold text-lg leading-snug mb-3 group-hover:text-sky-600 transition-colors"
-                    style={{ fontFamily: "'Syne', sans-serif" }}
+                    style={{ fontFamily: "'DM Sans', sans-serif" }}
                   >
                     {post.title}
                   </h2>

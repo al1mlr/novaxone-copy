@@ -102,15 +102,15 @@ function renderMarkdown(md: string) {
       i++; continue;
     }
     if (line.startsWith('### ')) {
-      elements.push(<h3 key={i} className="text-xl font-bold text-slate-900 mt-8 mb-3" style={{ fontFamily: "'Syne', sans-serif" }}>{line.slice(4)}</h3>);
+      elements.push(<h3 key={i} className="text-xl font-bold text-slate-900 mt-8 mb-3" style={{ fontFamily: "'DM Sans', sans-serif" }}>{line.slice(4)}</h3>);
       i++; continue;
     }
     if (line.startsWith('## ')) {
-      elements.push(<h2 key={i} className="text-2xl font-bold text-slate-900 mt-10 mb-4" style={{ fontFamily: "'Syne', sans-serif" }}>{line.slice(3)}</h2>);
+      elements.push(<h2 key={i} className="text-2xl font-bold text-slate-900 mt-10 mb-4" style={{ fontFamily: "'DM Sans', sans-serif" }}>{line.slice(3)}</h2>);
       i++; continue;
     }
     if (line.startsWith('# ')) {
-      elements.push(<h1 key={i} className="text-3xl font-bold text-slate-900 mt-10 mb-5" style={{ fontFamily: "'Syne', sans-serif" }}>{line.slice(2)}</h1>);
+      elements.push(<h1 key={i} className="text-3xl font-bold text-slate-900 mt-10 mb-5" style={{ fontFamily: "'DM Sans', sans-serif" }}>{line.slice(2)}</h1>);
       i++; continue;
     }
 
@@ -373,7 +373,7 @@ export default function BlogPostPage({ lang, slug }: { lang: Lang; slug: string 
                 </div>
                 <h1
                   className="text-white text-3xl md:text-4xl lg:text-5xl font-bold max-w-3xl"
-                  style={{ fontFamily: "'Syne', sans-serif" }}
+                  style={{ fontFamily: "'DM Sans', sans-serif" }}
                 >
                   {post.title}
                 </h1>
@@ -399,7 +399,7 @@ export default function BlogPostPage({ lang, slug }: { lang: Lang; slug: string 
                   <div className="mt-10 pt-8 border-t border-slate-200">
                     <h4
                       className="text-slate-700 font-semibold mb-4 text-sm uppercase tracking-wider"
-                      style={{ fontFamily: "'Syne', sans-serif" }}
+                      style={{ fontFamily: "'DM Sans', sans-serif" }}
                     >
                       {currentLang === 'fr' ? 'Références' : 'References'}
                     </h4>

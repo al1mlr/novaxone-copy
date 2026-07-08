@@ -108,11 +108,11 @@ export default function HeroSection({ lang }: HeroSectionProps) {
             ref={titleRef}
             className="text-white mb-6"
             style={{
-              fontFamily: "'Syne', sans-serif",
+              fontFamily: "'DM Sans', sans-serif",
               fontSize: 'clamp(2.5rem, 6vw, 5rem)',
               fontWeight: 800,
-              lineHeight: 1.2,
-              paddingBottom: '0.1em',
+              lineHeight: 1.3,
+              paddingBottom: '0.35em',
             }}
           >
             {t.tagline}

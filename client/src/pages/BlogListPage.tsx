@@ -101,7 +101,7 @@ export default function BlogListPage({ lang }: { lang: Lang }) {
             </div>
             <h1
               className="text-white text-4xl md:text-5xl font-bold"
-              style={{ fontFamily: "'Syne', sans-serif" }}
+              style={{ fontFamily: "'DM Sans', sans-serif" }}
             >
               {t.title}
             </h1>
@@ -154,7 +154,7 @@ export default function BlogListPage({ lang }: { lang: Lang }) {
                   <div className="p-6 flex flex-col flex-1">
                     <h2
                       className="text-slate-900 font-bold text-lg leading-snug mb-3 group-hover:text-sky-600 transition-colors"
-                      style={{ fontFamily: "'Syne', sans-serif" }}
+                      style={{ fontFamily: "'DM Sans', sans-serif" }}
                     >
                       {post.title}
                     </h2>
