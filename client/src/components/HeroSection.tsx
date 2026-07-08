@@ -111,7 +111,8 @@ export default function HeroSection({ lang }: HeroSectionProps) {
               fontFamily: "'Syne', sans-serif",
               fontSize: 'clamp(2.5rem, 6vw, 5rem)',
               fontWeight: 900,
-              lineHeight: 1.1,
+              lineHeight: 1.2,
+              paddingBottom: '0.1em',
             }}
           >
             {t.tagline}

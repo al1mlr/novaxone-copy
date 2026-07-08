@@ -7,6 +7,15 @@
   NODE_VERSION = "20"
   VITE_SITE_URL = "https://www.novaxone.com"
 
+# Edge Function pour les balises Open Graph (crawlers LinkedIn, Facebook, Twitter…)
+[[edge_functions]]
+  function = "og-meta"
+  path = "/blog/*"
+
+[[edge_functions]]
+  function = "og-meta"
+  path = "/en/blog/*"
+
 # Redirects pour le routage React (SPA)
 [[redirects]]
   from = "/*"

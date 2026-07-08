@@ -36,7 +36,7 @@ export function DemarcheSection({ lang }: { lang: Lang }) {
             <div className="h-px w-10 bg-sky-400" />
             <span className="text-sky-500 text-sm font-semibold tracking-widest uppercase">01</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4" style={{ fontFamily: "'Syne', sans-serif" }}>
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4" style={{ fontFamily: "'Syne', sans-serif", paddingBottom: '0.1em' }}>
             {t.title}
           </h2>
           <p className="text-slate-500 text-lg mb-3">{t.subtitle}</p>
@@ -82,7 +82,7 @@ export function SujetsSection({ lang }: { lang: Lang }) {
             <div className="h-px w-10 bg-sky-400" />
             <span className="text-sky-400 text-sm font-semibold tracking-widest uppercase">02</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-14" style={{ fontFamily: "'Syne', sans-serif" }}>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-14" style={{ fontFamily: "'Syne', sans-serif", paddingBottom: '0.1em' }}>
             {t.title}
           </h2>
 
@@ -130,7 +130,7 @@ export function ExpertisesSection({ lang }: { lang: Lang }) {
             <div className="h-px w-10 bg-sky-400" />
             <span className="text-sky-500 text-sm font-semibold tracking-widest uppercase">03</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-14" style={{ fontFamily: "'Syne', sans-serif" }}>
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-14" style={{ fontFamily: "'Syne', sans-serif", paddingBottom: '0.1em' }}>
             {t.title}
           </h2>
 
@@ -184,7 +184,7 @@ export function ClientsSection({ lang }: { lang: Lang }) {
             <div className="h-px w-10 bg-sky-400" />
             <span className="text-sky-500 text-sm font-semibold tracking-widest uppercase">04</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-14" style={{ fontFamily: "'Syne', sans-serif" }}>
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-14" style={{ fontFamily: "'Syne', sans-serif", paddingBottom: '0.1em' }}>
             {t.title}
           </h2>
 
@@ -236,7 +236,7 @@ export function AProposSection({ lang }: { lang: Lang }) {
             <div className="h-px w-10 bg-sky-400" />
             <span className="text-sky-400 text-sm font-semibold tracking-widest uppercase">05</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-14" style={{ fontFamily: "'Syne', sans-serif" }}>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-14" style={{ fontFamily: "'Syne', sans-serif", paddingBottom: '0.1em' }}>
             {t.title}
           </h2>
 
@@ -314,7 +314,7 @@ export function ContactSection({ lang }: { lang: Lang }) {
             <div className="h-px w-10 bg-sky-400" />
             <span className="text-sky-500 text-sm font-semibold tracking-widest uppercase">07</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-14" style={{ fontFamily: "'Syne', sans-serif" }}>
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-14" style={{ fontFamily: "'Syne', sans-serif", paddingBottom: '0.1em' }}>
             {t.title}
           </h2>
 

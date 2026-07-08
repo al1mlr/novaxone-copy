@@ -10,6 +10,8 @@ links: '[{"text":"n°743 de la Jaune et la Rouge","href":"https://www.lajauneetl
 
 ##### [paru en Mars 2019 dans la Jaune et la Rouge n°743]
 
+![Test image](/uploads/ia-prothese.jpg "IA : prothèse ou orthèse ?")
+
 ##### Beaucoup d'efforts sont consacrés à la définition de ce qu'est l'intelligence artificielle. Pas de cours sur l'IA qui ne commence par s'y essayer, avec en gros deux voies : une voie empirique, qui consiste à définir l'IA en tant que comportement similaire à l'humain d'une machine informatique, et une voie théorique, qui nous plonge dans l'exploration de ce qu'est la pensée ou l'action rationnelle et y relie l'IA et son analyse. Alors, prothèse ou orthèse ?
 
 Pour ceux qui, comme moi, ont utilisé les technologies dites de l'IA pour construire des applications, ce débat « ontologique » est certes intéressant, mais il ne nous permet pas de répondre aux questions concrètes : qu'est-ce que je peux espérer réaliser avec ces technologies que je ne pouvais faire auparavant ? Dans quels cas puis-je les utiliser à bon escient ?
