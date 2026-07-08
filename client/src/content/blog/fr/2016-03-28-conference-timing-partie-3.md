@@ -1,8 +1,11 @@
 ---
-title: "Conférence sur l'importance du timing (partie 3)"
-date: "2016-03-28"
-category: "Présentation"
-excerpt: "Être sensible aux signaux de timing. Une fois que l'on a compris comment évolue les marchés technologiques, on peut développer une sensibilité aux signaux qui permettent de savoir où on se trouve."
+title: Conférence sur l'importance du timing (partie 3)
+date: 2016-03-28
+category: Présentation
+excerpt: Être sensible aux signaux de timing. Une fois que l'on a compris
+  comment évolue les marchés technologiques, on peut développer une sensibilité
+  aux signaux qui permettent de savoir où on se trouve.
+coverImage: /uploads/timing-v2.jpg
 published: true
 ---
 
