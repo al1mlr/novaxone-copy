@@ -1,0 +1,22 @@
+Principe : Manus (manual) => Git local (manual) => Github  <=auto=> netlify 
+
+Ouvrir powershell
+
+# 1. Récupérer les commits Decap CMS depuis GitHub
+git pull origin main ;; ramène les modifs de github en local
+
+# 1. Extraire le ZIP dans votre répertoire local
+#    Les fichiers existants sont écrasés, les fichiers locaux absents du ZIP sont préservés
+Expand-Archive -Path "novaxone-sources.zip" `
+  -DestinationPath "C:\Users\ameller_local\Dropbox\DEV\Novaxone-copy" `
+  -Force
+Expand-Archive -Path "novaxone-patch.zip" `
+  -DestinationPath "C:\Users\ameller_local\Dropbox\DEV\Novaxone-copy" `
+  -Force
+
+# 3. Ajouter, committer et pousser
+cd C:\Users\ameller_local\Dropbox\DEV\Novaxone-copy
+git add .
+git commit -m "feat: restructuration bloc Contact (adresse/pays/email séparés)"
+git push origin main
+
